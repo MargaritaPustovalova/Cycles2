@@ -1,0 +1,73 @@
+package ru.netology.stats;
+
+public class StatsService {
+
+    public int minStales(long[] sales) {
+        int minMonth = 0;
+        int month = 0; // переменная для индекса рассматриваемого месяца в массиве
+        for (long sale : sales) {
+            // sales[minMonth] - продажи в месяце minMonth
+            // sale - продажи в рассматриваемом месяце
+            if (sale <= sales[minMonth]) {
+                minMonth = month;
+            }
+            month = month + 1; // следующий рассматриваемый месяц имеет номер на 1 больше
+        }
+        return minMonth + 1;
+    }
+
+    public int maxSales(long[] sales) {
+        int maxMonth = 0;
+        int month = 0; // переменная для индекса рассматриваемого месяца в массиве
+        for (long sale : sales) {
+            // sales[maxMonth] - продажи в месяце maxMonth
+            // sale - продажи в рассматриваемом месяце
+            if (sale >= sales[maxMonth]) {
+                maxMonth = month;
+            }
+            month = month + 1; // следующий рассматриваемый месяц имеет номер на 1 больше
+        }
+        return maxMonth + 1;
+    }
+
+    public long allSalesSum(long[] sales) {
+        long sum = 0;
+        for (long sale : sales) {
+            // аналог sum = sum + sale;
+            sum += sale;
+        }
+        return sum;
+    }
+
+    public long averageSum(long[] sales) {
+        long averageSum = allSalesSum(sales) / sales.length;
+        return averageSum;
+
+    }
+
+    public long bigSales(long[] sales) {
+        long average = averageSum(sales);
+        long bigSale = sales[0];
+        int month = 0;
+        for (long sale : sales) {
+            if (sale > average) {
+                ++month;
+            }
+        }
+        return month;
+
+    }
+
+    public long smallSales(long[] sales) {
+        long average = averageSum(sales);
+        long smallSale = sales[0];
+        int month = 0;
+        for (long sale : sales) {
+            if (sale < average) {
+                ++month;
+            }
+        }
+        return month;
+    }
+
+}
